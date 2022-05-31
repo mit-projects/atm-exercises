@@ -15,6 +15,17 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 .screen {
     border-radius: 10px;
     width: 400px;
@@ -31,11 +42,14 @@ body {
     animation: animate 1.2s linear infinite;
 }
 
-input {
+input,
+input:focus,
+input:active {
     background: none;
     border: 1px solid var(--cgreen);
     height: 50px;
     color: var(--cgreen);
+    outline: none;
 }
 
 button {
@@ -45,8 +59,8 @@ button {
     border: 1px solid var(--cgreen);
     margin: 5px;
     width: 120px;
-    transition: all 500ms ease;
-    ;
+    transition: all 300ms ease;
+
 }
 
 button:hover {

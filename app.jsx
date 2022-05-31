@@ -2,11 +2,14 @@ const ATMDeposit = ({ onChange, isDeposit }) => {
 
   return (
     <label className="label huge">
-      <input type="number" width="200" onChange={onChange}></input>
-      <input type="submit" width="200" value="Submit"></input>
+      <input type="number" width="300" onChange={onChange}></input>
     </label>
   );
 };
+
+const ATMError = ({ error }) => {
+  return (<span className='error'>{error}</span>)
+}
 
 const ATMButton = ({ label, handleAtmClick }) => {
   return (
@@ -18,6 +21,7 @@ const Account = () => {
   let deposit = 0; // state of this transaction
   const [totalState, setTotalState] = React.useState(0);
   const [mode, setMode] = React.useState('');
+  const [atmError, setAtmError] = React.useState('');
 
   let balance = totalState;
   const handleChange = event => {
@@ -29,6 +33,10 @@ const Account = () => {
     let newTotal = totalState;
     if (mode == "Deposit") newTotal += deposit;
     else if (mode == "Withdrawal" && deposit <= totalState) newTotal -= deposit;
+    else {
+      setAtmError('Insufficient Funds');
+      setTimeout(() => setAtmError(''), 2000);
+    }
     setTotalState(newTotal);
     setMode('');
   };
@@ -49,6 +57,7 @@ const Account = () => {
         </>
         }
       </form>
+      {atmError && <ATMError error={atmError} />}
     </div>
   );
 };
